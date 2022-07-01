@@ -1,45 +1,26 @@
-===================================================
-Tests for matrix_divided in 2-matrix_divided.py
-===================================================
+#!/usr/bin/python3
 
->>> matrix_divided = __import__('2-matrix_divided').matrix_divided
+"""
+Divides a matrix
+"""
 
->>> matrix_divided([[1, 2, 3],[4, 5, 6]], 3)
-[[0.33, 0.67, 1.0], [1.33, 1.67, 2.0]]
 
->>> matrix_divided([[1, 2, 3],[4, 5, 6]], 2)
-[[0.5, 1.0, 1.5], [2.0, 2.5, 3.0]]
+def matrix_divided(matrix, div):
+    """
+    Function that divides a matrix
+    """
+    listError = 'matrix must be a matrix (list of lists) of integers/floats'
+    sizeError = 'Each row of the matrix must have the same size'
+    if type(matrix) is not list:
+        raise TypeError(listError)
+    for item in range(len(matrix)):
+        if item is not 0:
+            result = item - 1
+            if len(matrix[item]) is not len(matrix[result]):
+                raise TypeError(sizeError)
+    if isinstance(div, int) is False:
+        raise TypeError('div must be a number')
+    if div is 0:
+        raise ZeroDivisionError('division by zero')
 
->>> matrix_divided([[1, 2, 3],[4, 5, 6],[7, 8, 9]], 2)
-[[0.5, 1.0, 1.5], [2.0, 2.5, 3.0], [3.5, 4.0, 4.5]]
-
->>> matrix_divided([[1, 2, 3],[4, 5, 6]], 0)
-Traceback (most recent call last):
-...
-ZeroDivisionError: division by zero
-
->>> matrix_divided("Hello", 5)
-Traceback (most recent call last):
-...
-TypeError: matrix must be a matrix (list of lists) of integers/floats
-
->>> matrix_divided([[1, 2, 3],[4, 5, 6]], "Hello")
-Traceback (most recent call last):
-...
-TypeError: div must be a number
-
->>> matrix_divided([[1, 2, 3],[4, 5]], 2)
-Traceback (most recent call last):
-TypeError: Each row of the matrix must have the same size
-
->>> matrix_divided((1, 2), 2)
-Traceback (most recent call last):
-TypeError: matrix must be a matrix (list of lists) of integers/floats
-
->>> matrix_divided([[2,3],[3, 4]])
-Traceback (most recent call last):
-TypeError: matrix_divided() missing 1 required positional argument: 'div'
-
->>> matrix_divided([[3, "a"], [12, 3]], 3)
-Traceback (most recent call last):
-TypeError: unsupported operand type(s) for /: 'str' and 'int'
+    return [[round(item / div, 2) for item in m_list] for m_list in matrix]
