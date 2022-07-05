@@ -1,13 +1,13 @@
 #!/usr/bin/python3
-"""write_file module.
-Contains a function that writes a text file.
+"""append_write module.
+Contains a function that appends a text file.
 """
 
 
-def write_file(filename="", text=""):
+def append_write(filename="", text=""):
     """
-    Writes a string to a text file (UTF8) and
-    returns the number of characters written.
+    Appends a string at the end of a text file (UTF8)
+    and returns the number of characters added.
     """
-    with open(filename, 'w') as f:
+    with open(filename, 'a') as f:
         return f.write(text)
